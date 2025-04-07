@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I love U❤️</title>
+    <style>
+        /* 基础样式 */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a1a;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* 爱心容器 */
+        .container {
+            position: relative;
+            text-align: center;
+        }
+
+        /* 爱心样式 */
+        .heart {
+            width: 80px;
+            height: 72px;
+            position: relative;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            width: 40px;
+            height: 64px;
+            background: #ff3366;
+            border-radius: 40px 40px 0 0;
+            transform-origin: 0 100%;
+        }
+
+        .heart:before {
+            transform: rotate(-45deg);
+        }
+
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        /* 心跳动画 */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.2); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.1); }
+            60% { transform: scale(1); }
+        }
+
+        /* 文字样式 */
+        .message {
+            opacity: 0;
+            margin-top: 30px;
+            font-size: 24px;
+            line-height: 1.5;
+            max-width: 80%;
+            transition: opacity 1s;
+            text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+        }
+
+        .show-text {
+            opacity: 1;
+        }
+
+        /* 文字动画 */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* 手机适配 */
+        @media (max-width: 480px) {
+            .heart {
+                width: 60px;
+                height: 54px;
+            }
+            .heart:before,
+            .heart:after {
+                width: 30px;
+                height: 48px;
+                left: 30px;
+            }
+            .message {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart" onclick="showMessage()"></div>
+        <div class="message" id="loveMessage">
+            ❤️ 傻逼赵如新<br>
+            ❤️ 好好吃饭睡觉<br>
+            ❤️ 不要不听话哦
+        </div>
+    </div>
+
+    <script>
+        function showMessage() {
+            const heart = document.querySelector('.heart');
+            const message = document.getElementById('loveMessage');
+
+            // 心跳动画
+            heart.style.animation = 'heartbeat 1s ease';
+            setTimeout(() => heart.style.animation = '', 1000);
+
+            // 显示文字
+            message.classList.add('show-text');
+
+            // 触摸设备兼容
+            heart.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                showMessage();
+            });
+        }
+    </script>
+</body>
+</html>
